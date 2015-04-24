@@ -31,7 +31,7 @@ def gen_depline(fortfile):
         for l in ff:
             m = usemodpat.match(l)
             if m:
-                modules_used.add(m.group(1))
+                modules_used.add(''.join([m.group(1), '.mod']))
 
     return "{}: {}".format(re.sub('\.F$', '.o', fortfile.parts[-1]), ' '.join(modules_used))
 
