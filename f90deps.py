@@ -33,7 +33,10 @@ def gen_depline(fortfile):
             if m:
                 modules_used.add(''.join([m.group(1).lower(), '.mod']))
 
-    return "{}: {}".format(re.sub('\.F$', '.o', fortfile.parts[-1]), ' '.join(modules_used))
+    if not modules_used:
+        return ''
+    else:
+        return '{}: {}'.format(re.sub('\.F$', '.o', fortfile.parts[-1]), ' '.join(modules_used))
 
 
 def main(directory):
