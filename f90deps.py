@@ -31,8 +31,6 @@ def gen_depline(fortfile):
         for l in ff:
             m = usemodpat.match(l)
             if m:
-                if debug_p:
-                    print("AHA! {}: {}".format(fortfile, m.group(1)))
                 modules_used.add(m.group(1))
 
     return "{}: {}".format(re.sub('\.F$', '.o', fortfile.parts[-1]), ' '.join(modules_used))
@@ -40,13 +38,6 @@ def gen_depline(fortfile):
 
 def main(directory):
     global debug_p
-
-
-    if debug_p:
-        print("directory = {}".format(directory))
-        if os.path.isdir(directory):
-            print("YAY {} is a directory".format(directory))
-
 
     p = Path(directory)
     fortfiles = list(p.glob('**/*.F'))
